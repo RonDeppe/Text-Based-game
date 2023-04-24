@@ -21,16 +21,26 @@ $antwoord2_id = $row["antwoord2_id"];
     <title>Document</title>
 </head>
 <body>
+    <h1 id="text-field"></h1>
     <?php 
-    echo "$vraag_text";
     echo "<button onclick='Answer($antwoord1_id)'>$antwoord1_text</button>";
     echo "<button onclick='Answer($antwoord2_id)'>$antwoord2_text</button>";
-    ?>
     
+    ?>
     <script>
         function Answer(id){
             window.location.href = "http://localhost/text-based-game/text.php?vraag=" + id;
         }
+        const text = "<?php echo $vraag_text ?>";
+        let i = 0;
+        function typeWriter(){
+            if(i < text.length){
+                document.getElementById("text-field").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        typeWriter();
     </script>
 </body>
 </html>
